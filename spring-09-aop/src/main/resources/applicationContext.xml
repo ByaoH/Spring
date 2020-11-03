@@ -7,11 +7,25 @@
     <bean class="com.l.log.AfterLog" id="afterLog"/>
 <!--    方式一 spring api 接口 -->
 <!--    配置aop-->
-    <aop:config>
+<!--    <aop:config>-->
 <!--        1.切入点 expression 表达式 (要执行的位置 )-->
-        <aop:pointcut id="pointcut" expression="execution(* com.l.service.UserServiceImpl.*(..))"/>
+<!--        <aop:pointcut id="pointcut" expression="execution(* com.l.service.UserServiceImpl.*(..))"/>-->
 <!--        环绕增强-->
-        <aop:advisor advice-ref="log" pointcut-ref="pointcut"/>
-        <aop:advisor advice-ref="afterLog" pointcut-ref="pointcut"/>
+<!--        <aop:advisor advice-ref="log" pointcut-ref="pointcut"/>-->
+<!--        <aop:advisor advice-ref="afterLog" pointcut-ref="pointcut"/>-->
+<!--    </aop:config>-->
+
+<!--    方式二-->
+    <bean class="com.l.diy.DiyPointCut" id="diy"/>
+
+    <aop:config>
+<!--        自定义切面 ref 要引用的类-->
+        <aop:aspect ref="diy">
+<!--            切入点-->
+            <aop:pointcut id="point" expression="execution(* com.l.service.UserServiceImpl.*(..))"/>
+<!--            通知-->
+            <aop:before method="before" pointcut-ref="point"/>
+            <aop:after method="after" pointcut-ref="point"/>
+        </aop:aspect>
     </aop:config>
 </beans>
