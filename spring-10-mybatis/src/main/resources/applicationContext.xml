@@ -7,4 +7,8 @@
     <bean class="com.l.dao.UserMapperImpl" id="userMapper">
         <property name="sqlSessionTemplate" ref="sqlSession"/>
     </bean>
+
+    <bean class="com.l.dao.UserMapperImpl2" id="userMapper2">
+        <property name="sqlSessionFactory" ref="sqlSessionFactory"/>
+    </bean>
 </beans>
